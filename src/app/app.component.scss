@@ -1,0 +1,36 @@
+@use "@carbon/layout";
+
+.main {
+  margin: layout.$spacing-05;
+  margin-top: 100px;
+  padding: layout.$spacing-02;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__label {
+  margin: layout.$spacing-08;
+}
+
+.form--error {
+  color: #da1e28;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.form {
+  margin: layout.$spacing-08;
+  display: flex;
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: layout.$spacing-02;
+}
+
+.option__button {
+  margin: 0 layout.$spacing-03;
+}
