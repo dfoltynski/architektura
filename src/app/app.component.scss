@@ -1,5 +1,11 @@
 @use "@carbon/layout";
 
+::ng-deep {
+  .bx--radio-button__label {
+    font-size: 16px;
+  }
+}
+
 .main {
   margin: layout.$spacing-05;
   margin-top: 100px;
@@ -33,4 +39,21 @@
 
 .option__button {
   margin: 0 layout.$spacing-03;
+}
+
+.destionation__header {
+  text-align: center;
+}
+
+.destination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: layout.$spacing-03;
+  margin-bottom: layout.$spacing-08;
+}
+
+.destination__container {
+  display: inline-block;
+  margin: auto layout.$spacing-05;
 }

@@ -9,6 +9,8 @@ import {
   IconModule,
   ButtonModule,
   InputModule,
+  CheckboxModule,
+  RadioModule,
 } from 'carbon-components-angular';
 import { HeaderComponent } from './header/header.component';
 
@@ -23,6 +25,8 @@ import { HeaderComponent } from './header/header.component';
     InputModule,
     FormsModule,
     ReactiveFormsModule,
+    CheckboxModule,
+    RadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

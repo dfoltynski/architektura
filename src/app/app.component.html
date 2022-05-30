@@ -18,12 +18,42 @@
     </ibm-label>
   </form>
 </main>
+<h4 class="destionation__header">
+  Wybierz pola, na których chcesz wykonać operacje
+</h4>
+<div class="destination">
+  <div class="destination__container" *ngFor="let i of [0, 1]">
+    <h6>{{ radioDestinations[i] }}</h6>
+    <ibm-radio-group
+      *ngFor="let field of fields; let fieldIndex = index"
+      [(ngModel)]="radioGroups[i]"
+      (change)="onRadioChange($event, i)"
+    >
+      <ibm-radio class="destinaton__option" [value]="field">{{
+        field
+      }}</ibm-radio>
+    </ibm-radio-group>
+  </div>
+</div>
+
 <div class="option">
   <button class="option__button" [ibmButton]="'primary'" (click)="show()">
     SHOW
   </button>
-  <button class="option__button" [ibmButton]="'primary'">MOV</button>
-  <button class="option__button" [ibmButton]="'primary'">XCHG</button>
+  <button
+    class="option__button"
+    (click)="mov(radioOptionFrom, radioOptionTo)"
+    [ibmButton]="'primary'"
+  >
+    MOV
+  </button>
+  <button
+    class="option__button"
+    (click)="xchg(radioOptionFrom, radioOptionTo)"
+    [ibmButton]="'primary'"
+  >
+    XCHG
+  </button>
 </div>
 
 <router-outlet></router-outlet>
