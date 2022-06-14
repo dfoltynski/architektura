@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   radioDestinations: string[] = ['OD', 'DO'];
 
   constructor() {
-    this.radioOptionFrom = new FormControl('');
+    this.radioOptionFrom = new FormControl();
     this.radioOptionTo = new FormControl('');
 
     this.radioGroups = [this.radioOptionFrom, this.radioOptionTo];
@@ -25,8 +25,7 @@ export class AppComponent implements OnInit {
     this.fields.forEach((field) => {
       this.registryData.addControl(
         field,
-        new FormControl('', [
-          Validators.required,
+        new FormControl(localStorage.getItem(field), [
           Validators.maxLength(6),
           Validators.minLength(6),
           Validators.pattern(/[0-9A-Fa-f]{6}/g),
@@ -43,33 +42,41 @@ export class AppComponent implements OnInit {
       : this.radioOptionTo.setValue(event.value);
   }
 
-  mov(source: FormControl | any, destination: FormControl | any) {
-    let sourceHolder = source.value;
-    let destinationHolder = destination.value;
-    console.log(source, destination);
-
-    this.registryData
-      .get(destinationHolder)
-      ?.setValue(this.registryData.get(sourceHolder)?.value);
-
-    this.registryData.get(destinationHolder)?.updateValueAndValidity();
+  persist(e: Event | any, key: string) {
+    localStorage.setItem(key, e.path[0].value);
   }
 
-  xchg(source: FormControl | any, destination: FormControl | any) {
-    let sourceHolder = source.value;
-    let destinationHolder = destination.value;
-    console.log(source, destination);
+  clearMemory() {
+    localStorage.clear();
+    this.registryData.reset();
+  }
+
+  mov(src: FormControl | any, dest: FormControl | any) {
+    let source = src.value;
+    let destination = dest.value;
 
     this.registryData
-      .get(destinationHolder)
-      ?.setValue(this.registryData.get(sourceHolder)?.value);
+      .get(destination)
+      ?.setValue(this.registryData.get(source)?.value);
 
-    this.registryData
-      .get(sourceHolder)
-      ?.setValue(this.registryData.get(destinationHolder)?.value);
+    this.registryData.get(destination)?.updateValueAndValidity();
+  }
 
-    this.registryData.get(destinationHolder)?.updateValueAndValidity();
-    this.registryData.get(sourceHolder)?.updateValueAndValidity();
+  xchg(src: FormControl | any, dest: FormControl | any) {
+    let source = src.value;
+    let destination = dest.value;
+
+    let values = [
+      this.registryData.get(source)?.value,
+      this.registryData.get(destination)?.value,
+    ];
+
+    this.registryData.get(destination)?.setValue(values[0]);
+
+    this.registryData.get(source)?.setValue(values[1]);
+
+    this.registryData.get(destination)?.updateValueAndValidity();
+    this.registryData.get(source)?.updateValueAndValidity();
   }
 
   show() {

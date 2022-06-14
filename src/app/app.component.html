@@ -14,6 +14,7 @@
         [size]="'sm'"
         [theme]="'light'"
         [placeholder]="'FFFFFF'"
+        (change)="persist($event, control.key)"
       />
     </ibm-label>
   </form>
@@ -39,6 +40,13 @@
 <div class="option">
   <button class="option__button" [ibmButton]="'primary'" (click)="show()">
     SHOW
+  </button>
+  <button
+    class="option__button"
+    (click)="clearMemory()"
+    [ibmButton]="'primary'"
+  >
+    CLEAR MEMORY
   </button>
   <button
     class="option__button"
